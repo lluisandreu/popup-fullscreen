@@ -15,8 +15,8 @@ i {font-family: "entypo" !important;}
     height: 100%;
     top: 0;
     left: 0;
-    z-index: -20;
-    background: #ccc;
+    z-index: -1;
+    background: #fff;
     opacity: 0;
     overflow-x: hidden;
     overflow-y: auto;
@@ -34,7 +34,7 @@ i {font-family: "entypo" !important;}
     -ms-transform: translateX(0);
     transition-duration: 0.4s;
     -webkit-transition-duration: 0.4s;
-    opacity: 0.98;
+    opacity: 0.95;
     z-index: 999;
 }
 
@@ -85,10 +85,6 @@ i {font-family: "entypo" !important;}
     color: #555;
 }
 
-#popupnav-fullscreen ul ul {
-
-}
-
 #popupnav-fullscreen .popupnav-close {
     position: absolute;
     top: 0;
@@ -97,11 +93,15 @@ i {font-family: "entypo" !important;}
 
 #popupnav-container .popupnav-trigger {
     font-size: 1.5em;
-    float: right;
-    margin-top: 30px;
 }
 
-#logo {float: left;}
+#popupnav-container .popupnav-trigger a {
+    padding: 5px;
+}
+
+/*
+* If you are using Modernizr this will fix the IE8 and IE7 issues
+*/
 
 html.ie7 #popupnav-fullscreen,
 html.ie8 #popupnav-fullscreen {

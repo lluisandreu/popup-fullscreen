@@ -6,6 +6,7 @@
             $('#popupnav-fullscreen').removeClass('closed').addClass('visible');
             $('html').css('overflow', 'hidden');
         });
+        // Clicking any link will close the overlay
         $('#popupnav-fullscreen a').on('click', function(event) {
             event.preventDefault();
             var location = $(this).attr('href');
