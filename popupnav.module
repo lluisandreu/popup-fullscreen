@@ -28,7 +28,7 @@ if ($delta == 'popupnav') {
 
 $form['popupnav_settings'] = array(
   '#type' => 'fieldset',
-  '#title' => t('Pop-up Navigation Settings'),
+  '#title' => t('Pop-up Navigation Main Settings'),
 
     'popupnav_settings_title' => array(
     '#type' => 'checkbox',
@@ -61,6 +61,30 @@ $form['popupnav_settings'] = array(
     ),
 
 );
+
+$form['popupnav_breakpoint'] = array(
+    '#type' => 'fieldset',
+    '#title' => t('Responsive settings'),
+
+    'popupnav_breakpoint_enable' => array(
+    '#type' => 'checkbox',
+    '#title' => t('Enable breakpoint'),
+    '#default_value' => variable_get('popupnav_breakpoint_enable', TRUE),
+    ),
+    'popupnav_breakpoint_hide' => array(
+    '#type' => 'textfield',
+    '#title' => t('Replace current menu.'),
+    '#default_value' => variable_get('popupnav_breakpoint_hide', '#block-system-main-menu'),
+    '#description' => t('Enter the ID of the menu you want to replace.'),
+    ),
+    'popupnav_breakpoint_settings' => array(
+    '#type' => 'textfield',
+    '#title' => t('Respond to this screen width size.'),
+    '#default_value' => variable_get('popupnav_breakpoint_settings', 600),
+    '#element_validate' => array('element_validate_integer_positive'),
+    '#description' => t('Value in Pixels'),
+    ),
+);
 }
 return $form;
 }
@@ -76,6 +100,9 @@ function popupnav_block_save($delta = '', $edit = array()) {
         variable_set('popupnav_settings_depth', $edit['popupnav_settings_depth']);
         variable_set('popupnav_settings_trigger', $edit['popupnav_settings_trigger']);
         variable_set('popupnav_settings_closer', $edit['popupnav_settings_closer']);
+        variable_set('popupnav_breakpoint_enable', $edit['popupnav_breakpoint_enable']);
+        variable_set('popupnav_breakpoint_settings', $edit['popupnav_breakpoint_settings']);
+        variable_set('popupnav_breakpoint_hide', $edit['popupnav_breakpoint_hide']);
     }
 }
 
@@ -87,13 +114,19 @@ function popupnav_block_view($delta = '') {
 
    // get the selected menu data
     $selected_menu = variable_get('popupnav_settings_menu');
+    $breakpoint = variable_get('popupnav_breakpoint_settings');
     $menu = menu_tree_all_data($selected_menu);
+    $replace_menu_id = str_replace(" ", "", variable_get('popupnav_breakpoint_hide'));
 
   if($delta == "popupnav"){
     $block['subject'] = NULL;
     $block['content'] = array(
         '#theme' => 'popupnav_theme',
         '#tree' => $menu,
+        '#attributes' => array(
+            'breakpoint' => $breakpoint,
+            'replace_menu_id' => $replace_menu_id,
+        ),
         '#attached' => array(
             'css' => array(drupal_get_path("module", "popupnav") . '/popupnav.css'),
             'js' => array(drupal_get_path("module", "popupnav") . '/popupnav.js'),
@@ -138,8 +171,20 @@ function theme_popupnav_theme($variables = array()){
 
     $menu_tree = $variables['tree'];
 
+    $breakpoint_enable = variable_get('popupnav_breakpoint_enable');
+    $breakpoint = $variables['attributes']['breakpoint'];
+    $replace_menu_id = $variables['attributes']['replace_menu_id'];
+
     $output = '<div id="popupnav-container">';
-    $output .= '<div id="popupnav-fullscreen"><div class="popupnav-wrapper">';
+    if($breakpoint_enable){
+        if(!empty($replace_menu_id)){
+            $output .= '<div id="popupnav-fullscreen" data-breakpoint="'.$breakpoint.'" data-replace="'.$replace_menu_id.'"><div class="popupnav-wrapper">';
+        } else {
+            $output .= '<div id="popupnav-fullscreen" data-breakpoint="'.$breakpoint.'"><div class="popupnav-wrapper">';
+        }
+    } else {
+        $output .= '<div id="popupnav-fullscreen"><div class="popupnav-wrapper">';
+    }
     $output .= '<div class="popupnav-close"><a href="#">'.$menu_closer.'</a></div>';
     if($show_title){
         $output .= '<h2>'.$block_title.'</h2>';

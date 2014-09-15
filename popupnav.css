@@ -8,6 +8,10 @@
 
 i {font-family: "entypo" !important;}
 
+#block-popupnav-popupnav {
+    display: none;
+}
+
 #popupnav-fullscreen,
 #popupnav-fullscreen .closed {
     position: fixed;
@@ -35,7 +39,7 @@ i {font-family: "entypo" !important;}
     transition-duration: 0.4s;
     -webkit-transition-duration: 0.4s;
     opacity: 0.95;
-    z-index: 999;
+    z-index: 9999;
 }
 
 #popupnav-fullscreen .popupnav-wrapper {
