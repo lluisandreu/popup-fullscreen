@@ -6,7 +6,7 @@
     font-weight: normal;
 }
 
-i {font-family: "entypo" !important;}
+i, span.collapse-trigger {font-family: "entypo" !important;}
 
 #block-popupnav-popupnav {
     display: none;
@@ -19,7 +19,7 @@ i {font-family: "entypo" !important;}
     height: 100%;
     top: 0;
     left: 0;
-    z-index: -1;
+    z-index: -999;
     background: #fff;
     opacity: 0;
     overflow-x: hidden;
@@ -36,6 +36,7 @@ i {font-family: "entypo" !important;}
     transform: translateX(0);
     -webkit-transform: translateX(0);
     -ms-transform: translateX(0);
+    transition-property: transform;
     transition-duration: 0.4s;
     -webkit-transition-duration: 0.4s;
     opacity: 0.95;
@@ -72,13 +73,25 @@ i {font-family: "entypo" !important;}
     color: #5EB6E5;
 }
 
+#popupnav-fullscreen ul li a:focus {
+    text-decoration: underline;
+}
+
 #popupnav-fullscreen ul > li.first-level {
     font-size: 1.7em;
-    margin: 10px auto;
+    margin: auto;
+    max-width: 14em;
+    padding: 10px;
 }
 
 #popupnav-fullscreen ul > li.first-level a {
     color:  #111;
+    max-width: 96%;
+    display: block;
+}
+
+#popupnav-fullscreen ul ul {
+    padding: 6px 0;
 }
 
 #popupnav-fullscreen ul ul > li.second-level {
@@ -89,10 +102,38 @@ i {font-family: "entypo" !important;}
     color: #555;
 }
 
+#popupnav-fullscreen ul.collapse {
+    display: none;
+}
+
+#popupnav-fullscreen ul li.parent-item {
+    background-color: #F7F7F7;
+    position: relative;
+    margin: 10px auto;
+}
+
+#popupnav-fullscreen .collapse-trigger {
+    position: absolute;
+    right: 0;
+    padding: 10px;
+    background-color: #F7F7F7;
+    top: 0;
+    cursor: pointer;
+}
+
 #popupnav-fullscreen .popupnav-close {
     position: absolute;
     top: 0;
     right: 0;
+    font-size: 1.6em;
+}
+
+#popupnav-fullscreen .popupnav-close a:hover {
+    color: red;
+}
+
+#popupnav-fullscreen .popupnav-close a:focus {
+    text-decoration: underline;
 }
 
 #popupnav-container .popupnav-trigger {
@@ -101,6 +142,10 @@ i {font-family: "entypo" !important;}
 
 #popupnav-container .popupnav-trigger a {
     padding: 5px;
+}
+
+#popupnav-container .popupnav-trigger a:focus {
+    color: red;
 }
 
 /*
