@@ -1,9 +1,7 @@
-i,
-span.collapse-trigger {
+i, span.collapse-trigger {
     font-family: entypo!important
 }
-#popupnav-fullscreen,
-#popupnav-fullscreen .closed {
+#popupnav-fullscreen, #popupnav-fullscreen .closed {
     position: fixed;
     width: 100%;
     height: 100%;
@@ -73,6 +71,7 @@ span.collapse-trigger {
     margin: auto;
     max-width: 14em;
     padding: 10px;
+    margin: 10px 0;
 }
 #popupnav-fullscreen ul > li.first-level a {
     color: #111;
@@ -88,9 +87,9 @@ span.collapse-trigger {
 #popupnav-fullscreen ul ul > li.second-level a {
     color: #555;
 }
-#popupnav-fullscreen .child-collapse,
-#popupnav-fullscreen .child-closed {
-    height: 0;
+#popupnav-fullscreen .child-collapse, #popupnav-fullscreen .child-closed {
+    position: absolute;
+    top: -999px;
     opacity: 0;
     padding: 0;
     transition-property: all;
@@ -98,15 +97,14 @@ span.collapse-trigger {
     -webkit-transition-duration: 0.2s;
 }
 #popupnav-fullscreen .child-collapsed {
-    height: 100%;
     opacity: 1;
+    z-index: 10;
     transition-property: all;
     transition-duration: 0.5s;
     -webkit-transition-duration: 0.5s;
 }
 #popupnav-fullscreen ul li.parent-item {
     position: relative;
-    margin: 10px auto;
 }
 #popupnav-fullscreen .collapse-trigger {
     position: absolute;
@@ -141,11 +139,9 @@ span.collapse-trigger {
 * If you are using Modernizr this will fix the IE8 and IE7 issues
 */
 
-html.ie7 #popupnav-fullscreen,
-html.ie8 #popupnav-fullscreen {
+html.ie7 #popupnav-fullscreen, html.ie8 #popupnav-fullscreen {
     visibility: hidden;
 }
-html.ie7 #popupnav-fullscreen.visible,
-html.ie8 #popupnav-fullscreen.visible {
+html.ie7 #popupnav-fullscreen.visible, html.ie8 #popupnav-fullscreen.visible {
     visibility: visible;
 }

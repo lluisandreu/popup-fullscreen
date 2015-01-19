@@ -46,7 +46,6 @@
     function esc() {
         document.onkeydown = function(key) {
             if (key.keyCode == 27 && popup.className == "visible") {
-                alert('que pasa tio');
                 popup.className = "closed";
             }
         }
