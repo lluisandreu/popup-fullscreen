@@ -71,7 +71,7 @@ i, span.collapse-trigger {
     margin: auto;
     max-width: 14em;
     padding: 10px;
-    margin: 10px 0;
+    margin: 10px auto;
 }
 #popupnav-fullscreen ul > li.first-level a {
     color: #111;
