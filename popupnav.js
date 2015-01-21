@@ -29,6 +29,12 @@
         closer.onclick = function() {
             popup.className = "closed";
         }
+        var links = document.querySelectorAll(".popupnav-navigation a");
+        for (var i = links.length - 1; i >= 0; i--) {
+            links[i].onclick = function() {
+                popup.className = "closed";
+            }
+        };
     }
 
     // If responsive is TRUE then show the menus at the right window width
